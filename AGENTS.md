@@ -63,6 +63,25 @@ Classify before editing; state only when it clarifies scope.
 ## Commit cadence
 Commit after each logically complete step in a multi-step task, not as one mega-commit at the end. One step ≈ one commit, scoped and reviewable. Ask before the first commit of a session; after that, keep committing as steps finish unless told otherwise.
 
+## Commit messages
+Write for the next developer or agent who has zero context from this session — not for the user you're currently talking to.
+- Conventional Commits: `feat:`, `fix:`, `chore:`, `docs:`, `refactor:`, `test:`, with an optional scope (`feat(web): ...`, `feat(contracts): ...`). Subject ≤72 chars, imperative ("add X", not "added X").
+- Body explains *why* — the motivation, constraint, or non-obvious decision. The diff already shows *what*.
+- No session-local references ("as we discussed", "per the prompt", "fix from earlier"). The commit must read clean six months later, on a different branch, to a stranger.
+- No secrets, no internal URLs, no PII.
+
+## Code comments
+Default: write none. Names and types already say *what*; the commit message and PR description carry the surrounding *why* for the change itself.
+Add a comment only when a future reader would otherwise be surprised or get it wrong:
+- A non-obvious invariant or constraint (e.g. "RLS guarantees ownership — no app-level check needed here").
+- A workaround tied to a specific bug, library quirk, or platform limitation — link the source.
+- A deliberate deviation from an obvious-looking alternative, with the reason.
+Do **not** write comments that:
+- Restate the code ("// loop over users").
+- Reference the current task, ticket, or who added them ("// added for the notes feature", "// per @alice").
+- Are TODOs without an owner and concrete trigger condition.
+Keep them short — one or two lines. If a comment needs a paragraph, prefer a doc page or commit-message body.
+
 ## Completion report
 State what changed and why, root cause if found, what was validated and how, whether docs need updating, and any remaining risks. Include a concise commit message.
 
