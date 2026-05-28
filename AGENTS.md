@@ -85,12 +85,22 @@ Keep them short — one or two lines. If a comment needs a paragraph, prefer a d
 ## Completion report
 State what changed and why, root cause if found, what was validated and how, whether docs need updating, and any remaining risks. Include a concise commit message.
 
-## Bootstrap-only instructions
+## If this is a fork
 
-<!-- BOOTSTRAP_ONLY_START -->
-This block exists only for fresh forks of the zerostack template. If this repo
-has not been adapted to a real project yet, read `.docs/SETUP.md` and follow it
-before any feature work: run the intake, rename the `@zerostack/*` scope, handle
-the git remote, and wire Supabase only if needed now. After setup is complete,
-delete this entire block.
-<!-- BOOTSTRAP_ONLY_END -->
+This block is for repos that started life as a fork of zerostack and
+still track `upstream` for template updates.
+
+**Before any non-trivial task in a fork, read [`docs/agent-rules.md`](./docs/agent-rules.md).**
+It defines which files are frozen (auth, SEO, CI, infra — do not edit,
+they apgrade via `git merge upstream/main`), which are customize
+(brand, copy — conflicts auto-resolve to the fork's version), and
+which are extend (product code — write freely here).
+
+The forking-time setup is in [`docs/forking-checklist.md`](./docs/forking-checklist.md).
+If this fork wasn't initialised through that checklist, run it first.
+
+When the user later upgrades the template (`git merge upstream/main`),
+respecting the frozen/customize/extend split keeps the merge clean.
+Editing frozen files in a fork stores up conflicts for that day.
+
+If this repo *is* zerostack (not a fork), ignore this section.
