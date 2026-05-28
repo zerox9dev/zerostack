@@ -1,0 +1,47 @@
+# Frozen-file owners. PRs touching these paths require @zerox9dev
+# review before merge. The boundary mirrors docs/agent-rules.md.
+#
+# Syntax: https://docs.github.com/repositories/managing-your-repositorys-settings-and-features/customizing-your-repository/about-code-owners
+
+# Catch-all fallback so unowned files still get reviewed.
+*                                       @zerox9dev
+
+# Auth + Supabase wiring
+/packages/supabase/src/                 @zerox9dev
+/apps/web/src/lib/supabase/             @zerox9dev
+/apps/web/src/lib/admin.ts              @zerox9dev
+/apps/web/src/proxy.ts                  @zerox9dev
+/apps/web/src/app/login/                @zerox9dev
+/apps/web/src/app/auth/                 @zerox9dev
+
+# SEO surface
+/apps/web/src/app/robots.ts             @zerox9dev
+/apps/web/src/app/sitemap.ts            @zerox9dev
+/apps/web/src/app/opengraph-image.tsx   @zerox9dev
+
+# Template surfaces (frozen — extend by composition, not by rewrite)
+/apps/web/src/app/app/layout.tsx        @zerox9dev
+/apps/web/src/app/app/app-nav.tsx       @zerox9dev
+/apps/web/src/app/app/settings/         @zerox9dev
+/apps/web/src/app/app/admin/            @zerox9dev
+/apps/web/src/components/feedback/      @zerox9dev
+/apps/web/src/components/waitlist/      @zerox9dev
+/apps/web/src/components/theme-*.tsx    @zerox9dev
+
+# Build + CI
+/.github/                               @zerox9dev
+/.husky/                                @zerox9dev
+/turbo.json                             @zerox9dev
+/pnpm-workspace.yaml                    @zerox9dev
+/packages/config/                       @zerox9dev
+
+# Template migrations (append-only; existing files frozen)
+/supabase/migrations/20260529000000_init_notes.sql              @zerox9dev
+/supabase/migrations/20260529001000_init_profiles.sql           @zerox9dev
+/supabase/migrations/20260529002000_init_waitlist_feedback.sql  @zerox9dev
+
+# Contracts and docs — anyone can propose, owner still reviews.
+/packages/contracts/src/                @zerox9dev
+/docs/                                  @zerox9dev
+/AGENTS.md                              @zerox9dev
+/.gitattributes                         @zerox9dev
