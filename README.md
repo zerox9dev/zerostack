@@ -5,7 +5,10 @@
 
 A modern, scalable monorepo starter. React everywhere, managed backend, agent-friendly.
 
-![zerostack landing](./.docs/screenshot.png)
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="./.docs/screenshot-dark.png">
+  <img alt="zerostack landing" src="./.docs/screenshot-light.png">
+</picture>
 
 ## Stack
 - **Monorepo** — pnpm workspaces + Turborepo
