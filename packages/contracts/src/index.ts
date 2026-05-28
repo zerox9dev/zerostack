@@ -29,3 +29,23 @@ export const createNoteSchema = noteSchema.pick({ title: true, content: true }).
 });
 
 export type CreateNoteInput = z.infer<typeof createNoteSchema>;
+
+export const profileSchema = z.object({
+  userId: z.string().uuid(),
+  displayName: z.string().min(1).max(80).nullable(),
+  avatarUrl: z.string().url().nullable(),
+  updatedAt: z.string().datetime({ offset: true }),
+});
+
+export type Profile = z.infer<typeof profileSchema>;
+
+export const updateProfileSchema = z.object({
+  displayName: z
+    .string()
+    .trim()
+    .max(80)
+    .transform((v) => (v.length === 0 ? null : v))
+    .nullable(),
+});
+
+export type UpdateProfileInput = z.infer<typeof updateProfileSchema>;
