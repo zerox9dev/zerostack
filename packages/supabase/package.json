@@ -6,6 +6,9 @@
   "exports": {
     ".": "./src/index.ts"
   },
+  "scripts": {
+    "db:types": "supabase gen types typescript --project-id \"${SUPABASE_PROJECT_ID:?set SUPABASE_PROJECT_ID}\" --schema public > src/types.ts"
+  },
   "devDependencies": {
     "@zerostack/config": "workspace:*",
     "typescript": "^6.0.3"
