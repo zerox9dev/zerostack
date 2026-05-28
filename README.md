@@ -1,5 +1,8 @@
 # zerostack
 
+[![CI](https://github.com/zerox9dev/zerostack/actions/workflows/ci.yml/badge.svg)](https://github.com/zerox9dev/zerostack/actions/workflows/ci.yml)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](./LICENSE)
+
 A modern, scalable monorepo starter. React everywhere, managed backend, agent-friendly.
 
 ## Stack
