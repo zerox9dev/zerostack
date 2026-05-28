@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { FeedbackWidget } from "@/components/feedback/feedback-widget";
 
 export const metadata: Metadata = {
   title: "Dashboard",
@@ -6,5 +7,10 @@ export const metadata: Metadata = {
 };
 
 export default function AppLayout({ children }: { children: React.ReactNode }) {
-  return children;
+  return (
+    <>
+      {children}
+      <FeedbackWidget />
+    </>
+  );
 }
