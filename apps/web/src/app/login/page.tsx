@@ -1,4 +1,10 @@
+import type { Metadata } from "next";
 import { LoginForm } from "./login-form";
+
+export const metadata: Metadata = {
+  title: "Sign in",
+  description: "Sign in to your zerostack workspace with a magic link.",
+};
 
 export default async function LoginPage({
   searchParams,
