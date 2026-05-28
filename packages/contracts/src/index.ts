@@ -3,7 +3,7 @@ import { z } from "zod";
 export const userSchema = z.object({
   id: z.string().uuid(),
   email: z.string().email(),
-  createdAt: z.string().datetime(),
+  createdAt: z.string().datetime({ offset: true }),
 });
 
 export type User = z.infer<typeof userSchema>;
@@ -19,7 +19,7 @@ export const noteSchema = z.object({
   userId: z.string().uuid(),
   title: z.string().min(1).max(200),
   content: z.string(),
-  createdAt: z.string().datetime(),
+  createdAt: z.string().datetime({ offset: true }),
 });
 
 export type Note = z.infer<typeof noteSchema>;
