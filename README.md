@@ -7,7 +7,12 @@ A modern, scalable monorepo starter. React everywhere, managed backend, agent-fr
 
 **Live demo:** [zerostack-web.vercel.app](https://zerostack-web.vercel.app)
 
+[![Use this template](https://img.shields.io/badge/Use%20this%20template-100000?style=for-the-badge&logo=github)](https://github.com/new?template_name=zerostack&template_owner=zerox9dev)
 [![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2Fzerox9dev%2Fzerostack&root-directory=apps%2Fweb&env=NEXT_PUBLIC_SUPABASE_URL,NEXT_PUBLIC_SUPABASE_ANON_KEY&envDescription=Get%20these%20from%20Supabase%20Dashboard%20%E2%86%92%20Settings%20%E2%86%92%20API&envLink=https%3A%2F%2Fsupabase.com%2Fdashboard&project-name=zerostack&repository-name=zerostack)
+
+> ℹ️ **First time?** [docs/forking-checklist.md](./docs/forking-checklist.md)
+> walks you through both paths (Use this template vs Fork) and the steps
+> after.
 
 <picture>
   <source media="(prefers-color-scheme: dark)" srcset="./docs/screenshot-dark.png">

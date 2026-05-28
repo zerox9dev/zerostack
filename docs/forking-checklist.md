@@ -1,16 +1,64 @@
 # Forking zerostack for a new product
 
-How to start a new project from this template **while keeping the
-ability to pull in upstream improvements later**. If you instead want a
-clean cut (no upstream tracking), use `npx degit zerox9dev/zerostack`
-and stop reading.
+## Pick your path first
 
-The companion document for the AI agent that will work in your fork is
-[`agent-rules.md`](./agent-rules.md). Read both before the first commit.
+Two ways to start a product from this template. The right choice
+depends on whether you ever expect to pull updates from zerostack
+back into the new repo.
+
+### A — **Use this template** (default, one click)
+
+[![Use this template](https://img.shields.io/badge/Use%20this%20template-100000?style=for-the-badge&logo=github)](https://github.com/new?template_name=zerostack&template_owner=zerox9dev)
+
+Or from the CLI:
+
+```bash
+gh repo create acme --template zerox9dev/zerostack --private --clone
+cd acme
+```
+
+**Result:** a brand-new repo with the latest zerostack code and **no
+history**. Fast. Clean. Forever disconnected from zerostack.
+
+Pick this if:
+- It's a short-lived MVP or prototype.
+- You don't expect to merge in template updates ever.
+- You want the simplest possible setup.
+
+Then skip the upstream-tracking sections below — go straight to step 3
+(rename the scope).
+
+### B — **Fork** (slower, keeps upstream tracking)
+
+```bash
+git clone git@github.com:zerox9dev/zerostack.git acme
+cd acme
+git remote rename origin upstream
+gh repo create acme --private --source=. --remote=origin
+git push -u origin main
+```
+
+**Result:** a repo with zerostack's full history and `upstream` set
+up so `git merge upstream/main` later pulls in template improvements.
+
+Pick this if:
+- The product is long-lived and template updates matter
+  (auth fixes, security patches, new shared modules).
+- You're willing to follow the contract in
+  [`agent-rules.md`](./agent-rules.md) about not touching frozen
+  files — otherwise the merges later won't be clean.
+- You'll do this same setup multiple times (every new product) and
+  want a single source of truth for shared infrastructure.
+
+If you picked B, continue to step 2.
+
+The companion document for the AI agent that will work in your fork
+either way is [`agent-rules.md`](./agent-rules.md). Read both before
+the first commit.
 
 ---
 
-## 1. Clone with upstream tracking
+## 1. Clone with upstream tracking _(path B only)_
 
 ```bash
 git clone git@github.com:zerox9dev/zerostack.git acme
@@ -24,7 +72,7 @@ git push -u origin main
 `gh repo create` needs the GitHub CLI; do it manually in the web UI if
 you don't have it.
 
-## 2. Enable the `ours` merge driver
+## 2. Enable the `ours` merge driver _(path B only)_
 
 ```bash
 git config merge.ours.driver true
@@ -36,7 +84,7 @@ the rules in `.gitattributes` are inert and you'll get conflicts in
 files you'll never want to share with upstream (README, branding,
 `site.ts`).
 
-## 3. Rename the scope
+## 3. Rename the scope _(both paths)_
 
 Find/replace across the repo:
 
@@ -134,7 +182,11 @@ only in `upstream`.
 
 ---
 
-## Pulling upstream updates later
+## Pulling upstream updates later _(path B only)_
+
+Only available if you took path B at the top. Path-A repos have no
+shared history with zerostack and cannot merge from it — read new
+zerostack changes with your eyes and apply useful ones by hand.
 
 When zerostack ships something useful (auth fix, SEO improvement, new
 example pattern):
