@@ -1,8 +1,3 @@
-import { createClient as createSupabaseClient } from "@supabase/supabase-js";
-import type { Database } from "./types";
-
-export function createClient(url: string, anonKey: string) {
-  return createSupabaseClient<Database>(url, anonKey);
-}
-
-export type { Database };
+export { createBrowserClient } from "./browser";
+export { createServerClient, type CookieAdapter, type CookieToSet } from "./server";
+export type { Database } from "./types";
