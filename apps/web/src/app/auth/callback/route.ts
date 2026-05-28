@@ -6,6 +6,12 @@ export async function GET(request: NextRequest) {
   const code = url.searchParams.get("code");
   const next = url.searchParams.get("next") ?? "/app";
 
+  // Supabase reports failures via query string instead of returning the code.
+  const supabaseError = url.searchParams.get("error_description") ?? url.searchParams.get("error");
+  if (supabaseError) {
+    return NextResponse.redirect(new URL(`/login?error=${encodeURIComponent(supabaseError)}`, url));
+  }
+
   if (!code) {
     return NextResponse.redirect(new URL("/login?error=missing_code", url));
   }
