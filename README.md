@@ -80,3 +80,6 @@ AGENTS.md          instructions for AI agents
 
 ## For AI agents
 Read [AGENTS.md](./AGENTS.md) before working in this repo.
+
+## License
+[MIT](./LICENSE)
