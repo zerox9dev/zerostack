@@ -1,0 +1,8 @@
+blank_issues_enabled: false
+contact_links:
+  - name: Security disclosure
+    url: https://github.com/zerox9dev/zerostack/security/advisories/new
+    about: Report a vulnerability privately. Do not file public issues for security.
+  - name: Read the contribution rules first
+    url: https://github.com/zerox9dev/zerostack/blob/main/docs/contributing.md
+    about: Severity threshold + decision tree. Issues below the bar will be closed.

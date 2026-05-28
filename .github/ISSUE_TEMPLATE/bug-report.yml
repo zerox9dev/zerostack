@@ -1,0 +1,81 @@
+name: Bug report
+description: Reproducible defect in shipped behaviour (auth, RLS, CI, Server Actions, SEO, build).
+title: "bug: "
+labels: ["bug"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Before filing, confirm this is a real bug — not a preference or a question.
+        See [docs/contributing.md](https://github.com/zerox9dev/zerostack/blob/main/docs/contributing.md)
+        for the severity threshold. Below-threshold issues are closed without comment.
+
+  - type: textarea
+    id: what
+    attributes:
+      label: What's broken
+      description: One sentence. What behaviour is wrong?
+      placeholder: "/app/admin returns 500 when ADMIN_EMAILS contains a trailing comma."
+    validations:
+      required: true
+
+  - type: textarea
+    id: repro
+    attributes:
+      label: Steps to reproduce
+      description: Minimal reproduction. Code, commands, config — whatever takes me from zero to seeing the bug.
+      placeholder: |
+        1. Fresh clone, `pnpm install`
+        2. Set ADMIN_EMAILS="a@b.com," in .env.local
+        3. `pnpm dev`, open /app/admin
+        4. Server logs show: TypeError: …
+    validations:
+      required: true
+
+  - type: textarea
+    id: expected
+    attributes:
+      label: What should happen instead
+    validations:
+      required: true
+
+  - type: input
+    id: commit
+    attributes:
+      label: zerostack commit / tag
+      description: The commit SHA or tag your fork is based on (helps me reproduce against the right snapshot).
+      placeholder: "v0.1.0 / 7164274"
+    validations:
+      required: true
+
+  - type: dropdown
+    id: surface
+    attributes:
+      label: Which area
+      options:
+        - auth (login, callback, proxy, session)
+        - data (Supabase clients, RLS, migrations)
+        - ui (landing, /app, settings, admin, widgets)
+        - infra (CI, husky, build, env, deploy)
+        - docs
+        - other / unsure
+    validations:
+      required: true
+
+  - type: input
+    id: env
+    attributes:
+      label: Node + pnpm versions
+      placeholder: "node 22.10, pnpm 11.2.2"
+
+  - type: checkboxes
+    id: checks
+    attributes:
+      label: Pre-flight
+      options:
+        - label: I searched existing issues and this isn't a duplicate.
+          required: true
+        - label: I read docs/contributing.md and this clears the severity threshold.
+          required: true
+        - label: I reproduced on a default-config clone, not just my fork's customisations.
+          required: true

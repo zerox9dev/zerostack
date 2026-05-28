@@ -1,0 +1,72 @@
+name: Improvement proposal
+description: Idea for changing or adding something. Use this BEFORE a feature PR.
+title: "proposal: "
+labels: ["proposal"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Proposals get discussed here first. A feature PR without a
+        landed proposal is likely to be closed. Read
+        [docs/contributing.md](https://github.com/zerox9dev/zerostack/blob/main/docs/contributing.md)
+        — vendor integrations and "alternative ways to do X" usually
+        belong in a fork, not upstream.
+
+  - type: textarea
+    id: problem
+    attributes:
+      label: The friction this removes
+      description: Real-user problem in concrete terms. Not "it would be nice if".
+      placeholder: |
+        Every fork that wants email beyond magic-link rebuilds the same
+        Resend wiring. Currently it takes ~2h per project.
+    validations:
+      required: true
+
+  - type: textarea
+    id: who
+    attributes:
+      label: Who benefits
+      description: Not "everyone". Who specifically — a fork author building X? A first-time forker?
+    validations:
+      required: true
+
+  - type: textarea
+    id: proposal
+    attributes:
+      label: Proposed change
+      description: Sketch only. We discuss before code.
+    validations:
+      required: true
+
+  - type: textarea
+    id: alternatives
+    attributes:
+      label: What you considered instead
+      description: Including "leave it to forks". This is the most useful section for the maintainer.
+    validations:
+      required: true
+
+  - type: dropdown
+    id: scope
+    attributes:
+      label: Estimated scope
+      options:
+        - Trivial (<50 lines, no new deps)
+        - Small (<300 lines, maybe one dep)
+        - Medium (new module / migration / route)
+        - Large (architectural — needs an RFC-style discussion)
+    validations:
+      required: true
+
+  - type: checkboxes
+    id: checks
+    attributes:
+      label: Pre-flight
+      options:
+        - label: I searched existing issues — this isn't already proposed.
+          required: true
+        - label: I read docs/contributing.md, particularly "What we do not accept."
+          required: true
+        - label: This belongs upstream, not as a fork-only change.
+          required: true
