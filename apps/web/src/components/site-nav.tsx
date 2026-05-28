@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
+import { ThemeToggle } from "@/components/theme-toggle";
 
 const links = [
   { href: "#features", label: "Features" },
@@ -27,9 +28,12 @@ export function SiteNav() {
             GitHub
           </a>
         </nav>
-        <Button asChild size="sm">
-          <Link href="/app">Open app</Link>
-        </Button>
+        <div className="flex items-center gap-1">
+          <ThemeToggle />
+          <Button asChild size="sm">
+            <Link href="/app">Open app</Link>
+          </Button>
+        </div>
       </div>
     </header>
   );
