@@ -104,9 +104,11 @@ Run `pnpm dev`, walk through `/`, `/login`, `/app`, `/app/settings`.
 
 ## 7. Delete bootstrap-only blocks
 
-- `.docs/SETUP.md` (the deprecated bootstrap doc) — delete.
-- `AGENTS.md` — delete the block between
-  `<!-- BOOTSTRAP_ONLY_START -->` markers.
+The `AGENTS.md` "If this is a fork" section is fork-specific and you
+keep it — that's the contract you want your agent to follow. The
+bootstrap-block markers (`<!-- BOOTSTRAP_ONLY_START -->`) were dropped
+from zerostack at the same time docs/agent-rules.md was added; if you
+forked an older revision and still see them, delete that block.
 
 ## 8. Vercel deploy
 
