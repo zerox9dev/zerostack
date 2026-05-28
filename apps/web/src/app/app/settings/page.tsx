@@ -1,8 +1,9 @@
 import { redirect } from "next/navigation";
 import Link from "next/link";
-import { ArrowLeft, LogOut } from "lucide-react";
+import { ArrowLeft, LogOut, Shield } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import { isAdminEmail } from "@/lib/admin";
 import { supabaseServer } from "@/lib/supabase/server";
 import { AppNav } from "../app-nav";
 import { signOut } from "../actions";
@@ -14,6 +15,8 @@ export default async function SettingsPage() {
   const supabase = await supabaseServer();
   const { data: userData } = await supabase.auth.getUser();
   if (!userData.user) redirect("/login");
+
+  const showAdmin = isAdminEmail(userData.user.email);
 
   const { data: profile } = await supabase
     .from("profiles")
@@ -67,6 +70,23 @@ export default async function SettingsPage() {
             </form>
           </CardContent>
         </Card>
+
+        {showAdmin && (
+          <Card>
+            <CardHeader>
+              <CardTitle>Admin</CardTitle>
+              <CardDescription>Internal dashboards. Visible only to you.</CardDescription>
+            </CardHeader>
+            <CardContent>
+              <Button asChild variant="outline">
+                <Link href="/app/admin">
+                  <Shield className="size-4" />
+                  Open admin
+                </Link>
+              </Button>
+            </CardContent>
+          </Card>
+        )}
       </main>
     </div>
   );
