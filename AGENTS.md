@@ -60,5 +60,18 @@ Classify before editing; state only when it clarifies scope.
 - Keep a single root lockfile. Don't create nested package lockfiles.
 - Don't kill processes to free ports; use a different port.
 
+## Commit cadence
+Commit after each logically complete step in a multi-step task, not as one mega-commit at the end. One step ≈ one commit, scoped and reviewable. Ask before the first commit of a session; after that, keep committing as steps finish unless told otherwise.
+
 ## Completion report
 State what changed and why, root cause if found, what was validated and how, whether docs need updating, and any remaining risks. Include a concise commit message.
+
+## Bootstrap-only instructions
+
+<!-- BOOTSTRAP_ONLY_START -->
+This block exists only for fresh forks of the zerostack template. If this repo
+has not been adapted to a real project yet, read `.docs/SETUP.md` and follow it
+before any feature work: run the intake, rename the `@zerostack/*` scope, handle
+the git remote, and wire Supabase only if needed now. After setup is complete,
+delete this entire block.
+<!-- BOOTSTRAP_ONLY_END -->
