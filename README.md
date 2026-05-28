@@ -5,6 +5,8 @@
 
 A modern, scalable monorepo starter. React everywhere, managed backend, agent-friendly.
 
+![zerostack landing](./.docs/screenshot.png)
+
 ## Stack
 - **Monorepo** — pnpm workspaces + Turborepo
 - **Web** — Next.js 16 (App Router), Tailwind 4, shadcn/ui
