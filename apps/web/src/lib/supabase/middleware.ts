@@ -1,11 +1,12 @@
 import { NextResponse, type NextRequest } from "next/server";
 import { createServerClient } from "@zerostack/supabase";
-import { SUPABASE_ANON_KEY, SUPABASE_URL } from "./env";
+import { supabaseEnv } from "./env";
 
 export async function updateSession(request: NextRequest) {
   let response = NextResponse.next({ request });
+  const { url, anonKey } = supabaseEnv();
 
-  const supabase = createServerClient(SUPABASE_URL, SUPABASE_ANON_KEY, {
+  const supabase = createServerClient(url, anonKey, {
     getAll: () => request.cookies.getAll().map(({ name, value }) => ({ name, value })),
     setAll: (toSet) => {
       for (const { name, value } of toSet) {

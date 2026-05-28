@@ -1,10 +1,11 @@
 import { cookies } from "next/headers";
 import { createServerClient } from "@zerostack/supabase";
-import { SUPABASE_ANON_KEY, SUPABASE_URL } from "./env";
+import { supabaseEnv } from "./env";
 
 export async function supabaseServer() {
+  const { url, anonKey } = supabaseEnv();
   const cookieStore = await cookies();
-  return createServerClient(SUPABASE_URL, SUPABASE_ANON_KEY, {
+  return createServerClient(url, anonKey, {
     getAll: () => cookieStore.getAll().map(({ name, value }) => ({ name, value })),
     setAll: (toSet) => {
       try {

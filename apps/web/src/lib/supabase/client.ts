@@ -1,8 +1,9 @@
 "use client";
 
 import { createBrowserClient } from "@zerostack/supabase";
-import { SUPABASE_ANON_KEY, SUPABASE_URL } from "./env";
+import { supabaseEnv } from "./env";
 
 export function supabaseBrowser() {
-  return createBrowserClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+  const { url, anonKey } = supabaseEnv();
+  return createBrowserClient(url, anonKey);
 }
