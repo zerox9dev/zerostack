@@ -6,6 +6,7 @@ const links = [
   { href: "#features", label: "Features" },
   { href: "#stack", label: "Stack" },
   { href: "#quickstart", label: "Quick start" },
+  { href: "#waitlist", label: "Waitlist" },
 ];
 
 export function SiteNav() {

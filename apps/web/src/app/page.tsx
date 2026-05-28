@@ -11,6 +11,7 @@ import {
 import { Button } from "@/components/ui/button";
 import { SiteFooter } from "@/components/site-footer";
 import { SiteNav } from "@/components/site-nav";
+import { WaitlistForm } from "@/components/waitlist/waitlist-form";
 
 const stack = ["Next.js 16", "Supabase", "shadcn/ui", "Tailwind 4", "Zod", "Turborepo", "pnpm"];
 
@@ -174,6 +175,25 @@ export default function Home() {
               <Button asChild variant="outline">
                 <Link href="/app">Try the demo</Link>
               </Button>
+            </div>
+          </div>
+        </section>
+
+        {/* Waitlist */}
+        <section id="waitlist" className="border-t border-border/60">
+          <div className="mx-auto max-w-6xl px-6 py-20">
+            <p className="text-xs font-semibold uppercase tracking-[0.2em] text-muted-foreground">
+              Stay in the loop
+            </p>
+            <h2 className="mt-3 max-w-2xl text-3xl font-semibold tracking-tight">
+              Get a heads-up when new modules ship.
+            </h2>
+            <p className="mt-3 max-w-xl text-sm text-muted-foreground">
+              Drop your email — we&apos;ll send a short note when major additions
+              (Stripe, teams, mobile) land. No noise.
+            </p>
+            <div className="mt-6">
+              <WaitlistForm source="landing" />
             </div>
           </div>
         </section>
