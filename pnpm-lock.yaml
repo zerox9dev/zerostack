@@ -36,6 +36,9 @@ importers:
       '@types/react-dom':
         specifier: ^19
         version: 19.2.3(@types/react@19.2.15)
+      '@zerostack/config':
+        specifier: workspace:*
+        version: link:../../packages/config
       eslint:
         specifier: ^9
         version: 9.39.4(jiti@2.7.0)
@@ -48,6 +51,8 @@ importers:
       typescript:
         specifier: ^5
         version: 5.9.3
+
+  packages/config: {}
 
 packages:
 
