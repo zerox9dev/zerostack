@@ -16,6 +16,7 @@ The rule of thumb: **does upstream ship updates to this file?**
 
 ## Three classes of files
 
+<a id="frozen"></a>
 ### 🔒 Frozen — do not edit
 
 Auth, SEO, CI, and infrastructure. Edits here cause merge conflicts
@@ -209,3 +210,152 @@ The root [`AGENTS.md`](../AGENTS.md) rules apply unchanged:
 The pre-commit hook (`pnpm lint-staged` + `pnpm typecheck`) is frozen.
 Don't disable it; if it slows you down, the cache makes the second
 run sub-second.
+
+---
+
+<a id="upstream"></a>
+## When you notice something wrong with the template itself
+
+You're working in a fork, and you've spotted a bug, dead doc link, or
+inconsistency in **upstream** zerostack (frozen files, shipped docs,
+CI config). Apply this decision tree before doing anything:
+
+```
+                  Is the change useful only to THIS product?
+                                │
+                       ┌────────┴────────┐
+                      Yes                No
+                       │                 │
+                  Patch locally      Is it a security issue?
+                  in the fork.            │
+                  Do not upstream.   ┌────┴────┐
+                                    Yes        No
+                                     │         │
+                                Private        Is it a verifiable bug
+                                disclosure     OR a doc fix < 20 lines?
+                                (security           │
+                                advisory).    ┌─────┴─────┐
+                                             Yes          No
+                                              │           │
+                                         Open a PR    Is it a substantial
+                                         upstream.    feature / refactor?
+                                                          │
+                                                     ┌────┴────┐
+                                                    Yes        No
+                                                     │         │
+                                                Open an     Keep it local.
+                                                Issue       Below threshold.
+                                                ("proposal")
+```
+
+### Hard severity threshold
+
+Do **not** open issues or PRs upstream below this bar:
+
+- ✅ Real bug in shipped behaviour (auth flow, RLS policy, build,
+  CI gate, type error from a default clone).
+- ✅ Documentation typo, broken link, or outdated instruction that
+  misleads a future reader.
+- ✅ Security vulnerability — but **private channel only**, not
+  public issue. See [`.github/SECURITY.md`](../.github/SECURITY.md).
+- ✅ Concrete proposal for a feature that benefits *every fork* and
+  the user explicitly agreed to upstream it.
+
+- ❌ Personal preferences ("I'd rename this", "I'd format this
+  differently").
+- ❌ Refactors without a defect.
+- ❌ Vendor integrations (Stripe, Resend, OAuth provider, analytics)
+  — those belong in forks.
+- ❌ "Wouldn't it be nice if…" without a concrete user.
+- ❌ Anything you can fix locally in the fork without affecting other
+  forks.
+
+When in doubt: **don't open it.** The maintainer prefers missing a
+mediocre suggestion over drowning in noise.
+
+### Before opening anything
+
+Always check first:
+
+```bash
+# Are there existing issues / PRs covering this?
+gh issue list --repo zerox9dev/zerostack --search "<keywords>"
+gh pr list    --repo zerox9dev/zerostack --search "<keywords>"
+```
+
+If a duplicate exists, comment there instead of opening a new one.
+
+### How to open an issue upstream
+
+```bash
+gh issue create --repo zerox9dev/zerostack --web
+```
+
+`--web` opens the prefilled form. Pick the right template:
+- **Bug report** for reproducible defects.
+- **Improvement proposal** for new ideas (mandatory before any
+  feature PR).
+
+Fill every required field. Concrete reproduction beats long prose.
+Cross-link the upstream commit your fork is based on so the
+maintainer can rebase to that snapshot.
+
+### How to open a PR upstream
+
+The maintainer requires a real GitHub user account for the PR — you
+cannot push to `zerox9dev/zerostack` directly. The flow:
+
+```bash
+# 1. One-time: fork zerostack on the user's account
+gh repo fork zerox9dev/zerostack --clone=false
+
+# 2. Clone the user's fork to a working directory outside the product
+cd /tmp
+gh repo clone <username>/zerostack zerostack-upstream-pr
+cd zerostack-upstream-pr
+git remote add upstream git@github.com:zerox9dev/zerostack.git
+git fetch upstream
+git checkout -b fix/<short-slug> upstream/main
+
+# 3. Apply the smallest patch that fixes the problem
+#    — copy from the product fork, do NOT bring along product code
+pnpm install
+pnpm typecheck && pnpm lint && pnpm build
+
+# 4. Commit with conventional-commits, push, open PR
+git add -p   # stage exactly the patch — nothing else
+git commit -m "fix(scope): one-line subject
+
+Body: what's wrong and why this fixes it. Reference the upstream
+issue if one exists. Keep the surface minimal — see CODEOWNERS for
+which files require maintainer review.
+"
+git push -u origin fix/<short-slug>
+gh pr create --fill --web
+```
+
+**Strict requirements:**
+
+1. **One concern per PR.** Don't bundle the fix with a tangential
+   cleanup, even a tempting one.
+2. **Don't touch frozen files** unless the bug is in a frozen file
+   itself (and then say so in the PR body).
+3. **No product code.** Anything specific to this fork's product
+   must not appear in the diff.
+4. **PR template filled completely.** Skipped checkboxes are a
+   closed PR.
+5. **CI must pass.** Push again after fixing if it doesn't.
+
+### What to do *instead* most of the time
+
+You are unlikely to need this flow often. The default is:
+
+1. Fix the problem **locally in the fork**.
+2. Note it in this fork's `docs/upstream-drift.md` (create the file
+   if missing) so future merges with `upstream/main` know about the
+   patch.
+3. Continue with the product work.
+
+Upstreaming is for cases where keeping the patch local would mean
+solving the same problem in every future fork — i.e. it's a
+template-level concern, not a product-level one.

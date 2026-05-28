@@ -93,6 +93,9 @@ AGENTS.md          instructions for AI agents
 ## Documentation
 - [Architecture](./docs/architecture.md) — how the pieces fit (contracts, RLS, Server Actions, SEO, CI).
 - [Production checklist](./docs/production-checklist.md) — what to wire up before real users hit it.
+- [Forking checklist](./docs/forking-checklist.md) — start a new product from this template, track upstream.
+- [Agent rules (forks)](./docs/agent-rules.md) — frozen / customize / extend contract for agents.
+- [Contributing](./docs/contributing.md) — issue + PR bar, severity threshold, how to land a change.
 - [AGENTS.md](./AGENTS.md) — instructions for AI agents working in this repo.
 - [CHANGELOG.md](./CHANGELOG.md) — release history.
 
