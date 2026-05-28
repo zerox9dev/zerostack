@@ -1,0 +1,23 @@
+# Merge strategy for forks tracking zerostack as `upstream`.
+#
+# Files below are "customize" — every fork rebrands them and never wants
+# them silently overwritten by `git merge upstream/main`. The `ours`
+# driver picks the fork's version on conflict.
+#
+# To activate in a fork (one-time):
+#   git config merge.ours.driver true
+#
+# Without that config the lines below are inert, so zerostack itself
+# keeps normal three-way merges.
+#
+# See docs/agent-rules.md for the full frozen / customize / extend split.
+
+apps/web/src/lib/site.ts                  merge=ours
+apps/web/src/app/layout.tsx               merge=ours
+apps/web/src/app/page.tsx                 merge=ours
+apps/web/src/components/site-nav.tsx      merge=ours
+apps/web/src/components/site-footer.tsx   merge=ours
+README.md                                 merge=ours
+LICENSE                                   merge=ours
+.env.example                              merge=ours
+package.json                              merge=ours
