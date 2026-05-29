@@ -11,10 +11,10 @@ The form lets you describe the issue, attach a proof of concept, and
 chat with the maintainer without exposing the problem to the public
 issue tracker.
 
-If GitHub advisories are unavailable, email
-`REMOVED` with **`[zerostack security]`** in the
-subject. Acknowledgement within 7 days; you can chase me with a
-follow-up if I miss that window.
+If GitHub advisories are unavailable, open a regular issue titled
+`security: contact request` (no details) and the maintainer will
+follow up through a private channel. Acknowledgement within 7 days;
+chase with a follow-up if I miss that window.
 
 ## What counts as a vulnerability in this template
 
